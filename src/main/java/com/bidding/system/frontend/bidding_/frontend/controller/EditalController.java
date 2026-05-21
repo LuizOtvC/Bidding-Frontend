@@ -6,7 +6,6 @@ package com.bidding.system.frontend.bidding_.frontend.controller;
 
 
 import com.bidding.system.frontend.bidding_.frontend.model.EditalBean;
-import com.bidding.system.frontend.bidding_.frontend.model.UserLogarBean;
 import com.bidding.system.frontend.bidding_.frontend.service.EditalService;
 import jakarta.servlet.http.HttpSession;
 import java.util.List;
@@ -15,8 +14,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import org.springframework.web.bind.annotation.PostMapping;
-
 
 /**
  *
@@ -24,25 +21,21 @@ import org.springframework.web.bind.annotation.PostMapping;
  */
 @Controller
 public class EditalController {
+
     @Autowired
-    private EditalService servico;
-    
-    
-    
-@GetMapping("/listar")
-public String listarEditais(HttpSession session, Model model) {
-    try {
+    private EditalService editalService;
+
+    @GetMapping("/editais")
+    public String listarEditais(HttpSession session, Model model) {
         String token = (String) session.getAttribute("token");
         
-        List<EditalBean> editais = servico.listareditais(token);
+        if (token == null) {
+        return "redirect:/login";
+    }
         
+        List<EditalBean> editais = editalService.listareditais(token);
         model.addAttribute("editais", editais);
-        
         return "editais";
-    } catch (Exception e) {
-        return "redirect:/login?error=true";
     }
 }
-
    
-}

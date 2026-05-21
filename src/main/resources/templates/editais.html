@@ -1,33 +1,27 @@
 <!DOCTYPE html>
-<!--
-Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
-Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this template
--->
-<!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Editais</title>
 </head>
 <body>
-
     <h1>Lista de Editais</h1>
-
     <table>
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Título</th>
-                <th>Descrição</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr th:each="edital : ${editais}">
-                <td th:text="${edital.id}"></td>
-                <td th:text="${edital.titulo}"></td>
-                <td th:text="${edital.descricao}"></td>
-            </tr>
-        </tbody>
+        <tr>
+            <th>ID</th>
+            <th>Título</th>
+            <th>Descrição</th>
+            <th>Data Fechamento</th>
+            <th>Status</th>
+        </tr>
+        <tr th:each="edital : ${editais}">
+            <td th:text="${edital.id}"></td>
+            <td th:text="${edital.titulo}"></td>
+            <td th:text="${edital.descricao}"></td>
+            <td th:text="${edital.data_fechamento}"></td>
+            <td th:text="${edital.status}"></td>
+        </tr>
     </table>
-
+    
+    
 </body>
 </html>
