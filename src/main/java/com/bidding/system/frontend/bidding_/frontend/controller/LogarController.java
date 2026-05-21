@@ -28,12 +28,19 @@ public class LogarController {
         model.addAttribute("user", new UserLogarBean());
         return "login";
     }
+    
+    @GetMapping("/home")
+    public String home(Model model) {
+        model.addAttribute("message", "opa");
+        return "home";
+    }
+    
 
     @PostMapping("/login")
     public String fazerLogin(@ModelAttribute UserLogarBean user, HttpSession session) {
         String token = authService.logar(user);
         session.setAttribute("token", token);
-        return "redirect:/editais";
+        return "redirect:/home";
     }
     
 }
