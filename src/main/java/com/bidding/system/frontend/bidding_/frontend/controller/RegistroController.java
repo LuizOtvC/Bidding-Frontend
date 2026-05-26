@@ -5,7 +5,7 @@
 package com.bidding.system.frontend.bidding_.frontend.controller;
 
 import com.bidding.system.frontend.bidding_.frontend.model.UserBean;
-import com.bidding.system.frontend.bidding_.frontend.service.RegistroService;
+import com.bidding.system.frontend.bidding_.frontend.service.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 public class RegistroController {
     @Autowired
-    private RegistroService service;
+    private AuthService service;
 
     @GetMapping("/registro")
     public String paginaRegistro(Model model) {
@@ -31,7 +31,7 @@ public class RegistroController {
     @PostMapping("/registro")
     public String fazerRegistro(@ModelAttribute UserBean user) {
         service.Registrar(user);
-        return "redirect:/login";
+        return "redirect:/logar";
     }
     
     

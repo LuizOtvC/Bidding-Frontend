@@ -3,13 +3,16 @@
 <head><title>Login</title></head>
 <body>
     <h1>Registro</h1>
-    <form action="/registro" method="post" th:object="${registro}">
+    <form th:action="@{/registro}" method="post" th:object="${registro}">
+        <label>Nome: </label><br>
         <input type="text" th:field="*{nome}" placeholder="Nome"/><br><br>
+        <label>Email: </label><br>
         <input type="email" th:field="*{email}" placeholder="Email"/><br><br>
+        <label>Senha: </label><br>
         <input type="password" th:field="*{senha}" placeholder="Senha"/><br><br>
-        <input type="text" th:field="*{role}" placeholder="Role"/><br><br>
+        
         <button type="submit">Registrar</button><br><br>
     </form>
-    <a href="/login"><button>Fazer login</button></a>
+    <a href="./logar"><button>Fazer login</button></a>
 </body>
 </html>
