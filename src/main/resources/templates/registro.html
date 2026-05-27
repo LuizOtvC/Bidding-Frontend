@@ -1,18 +1,54 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head><title>Login</title></head>
-<body>
-    <h1>Registro</h1>
+<head><title>
+        Fazer Registro</title>
+<link rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.8/css/bootstrap.min.css}"/>
+</head>
+<body class="d-flex align-items-center justify-content-center" style="height: 100vh">
+    <div class="card shadow p-4" style="width: 100%; max-width: 500px; ">  
+    <h1 class="text-center mb-4">Registro</h1>
+   
+        
+    <legend>Fazer Registro: </legend><br>
     <form th:action="@{/registro}" method="post" th:object="${registro}">
         <label>Nome: </label><br>
-        <input type="text" th:field="*{nome}" placeholder="Nome"/><br><br>
+        <input type="text" class="form-control text-black bg-gray" th:field="*{nome}" placeholder="Nome"/><br>
+        <div class="col-auto">
         <label>Email: </label><br>
-        <input type="email" th:field="*{email}" placeholder="Email"/><br><br>
+        <div class="input-group">
+      <div class="input-group-text">@</div>
+      <input type="email" class="form-control text-black bg-gray" th:field="*{email}" placeholder="Email"/><br>
+        </div>
+        </div>
+        <br>
         <label>Senha: </label><br>
-        <input type="password" th:field="*{senha}" placeholder="Senha"/><br><br>
-        
-        <button type="submit">Registrar</button><br><br>
+        <div class="input-group">
+        <input type="password" class="form-control text-black bg-gray" th:field="*{senha}" placeholder="Senha"/><br>
+        <button type="button" class="btn btn-outline-secondary" onclick="toggleSenha()">
+        <i id="eyeIcon" class="bi bi-eye"></i>
+    </button>
+</div><br>
+        <div class="text-center mb-4">
+            <button type="submit" class="btn btn-dark" style="width: 100%; max-width: 400px; ">Registrar</button><br><br>
+        </div>
+
     </form>
-    <a href="./logar"><button>Fazer login</button></a>
+    <span onclick="window.location.href='./logar'" style="cursor: pointer;">Ja Possui Registro?</span>
+    </div>
+    
+    
+    <script>
+function toggleSenha() {
+    const input = document.getElementById('senha');
+    const icon = document.getElementById('eyeIcon');
+    if (input.type === 'password') {
+        input.type = 'text';
+        icon.className = 'bi-eye-slash';
+    } else {
+        input.type = 'password';
+        icon.className = 'bi bi-eye';
+    }
+}
+</script>
 </body>
 </html>

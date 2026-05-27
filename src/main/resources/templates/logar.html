@@ -1,16 +1,31 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head><title>Login</title></head>
-<body>
-    <h1>Login</h1>
-    <fieldset>
-        <legend>Realizar Login:</legend><br>
-    <form action="/logar" method="post" th:object="${user}">
-        <input type="email" th:field="*{email}" placeholder="Email"/><br><br>
-        <input type="password" th:field="*{senha}" placeholder="Senha"/><br><br>
-        <button type="submit">Entrar</button><br>
-        </fieldset><br>
+<head><title>
+        Logar
+    </title>
+   
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.8/css/bootstrap.min.css}"/>
+</head>
+<body class="d-flex align-items-center justify-content-center" style="height: 100vh">
+    
+    <div class="card shadow p-4" style="width: 100%; max-width: 400px; ">        
+        <h1 class="text-center mb-4" >Login</h1><br>
+    <fieldset>    
+        <legend>Realizar Login:</legend><br><br>    
+    <form action="/logar" method="post" th:object="${user}">   
+        <label>Email: </label><br>
+        <input type="email" class="form-control text-black bg-gray" th:field="*{email}" placeholder="Email"/><br>
+        <label>Senha: </label><br>
+        <input type="password" class="form-control text-black bg-gray" th:field="*{senha}" placeholder="Senha"/><br><br>
+        <div class="text-center mb-4">
+        <button type="submit" class="btn btn-dark" style="width: 100%; max-width: 400px; ">Logar</button><br>   
+        </div>
+        </fieldset>
     </form>
-    <a href="./registro"><button>Fazer registro</button></a>
+            
+    <span onclick="window.location.href='./registro'" style="cursor: pointer;">Não possui Login? Registre-se!</span>
+    </div> 
+    
+
 </body>
 </html>
