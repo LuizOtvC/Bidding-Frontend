@@ -2,10 +2,15 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Editais</title>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.8/css/bootstrap.min.css}"/>
 </head>
 <body>
-    <h1>Lista de Editais</h1>
-    <table>
+    <br><h1 class="text-center mb-4">Lista de Editais</h1><br><br>
+    
+    
+        <div class="container">
+            <div class="row justify-content-center">               
+    <table class="table table-striped-columns">
         <tr>
             <th>ID</th>
             <th>Título</th>
@@ -20,10 +25,12 @@
             <td th:text="${edital.data_fechamento}"></td>
             <td th:text="${edital.status}"></td>
         </tr>
+    
     </table>
-    
-    
-    
-    
+      
+    </div>
+        </div>
+            
+   
 </body>
 </html>

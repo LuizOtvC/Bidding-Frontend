@@ -1,10 +1,52 @@
 <!DOCTYPE html>
 <html>
-<head><title>Home</title></head>
+<head><title>
+        Home
+    </title>
+<link rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.8/css/bootstrap.min.css}"/>
+</head>
 <body>
-    <h1>Pagina Principal</h1>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+  <div class="container-fluid">
+    <a class="navbar-brand">Home</a>
+  
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="/editais">Lista de Editais</a>
+        </li>
+      </ul>
+    
+    
+    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" href="/logout">Relogar</a>
+        </li>
+      </ul>
+  </div>
+    </nav><br>
+    
+    <div class="toast-container position-fixed bottom-0 end-0 p-3">
+        <div id="loginToast" class="toast align-items-center text-bg-success border-0"
+             role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="d-flex">
+                <div class="toast-body">
+                    Bem vindo a minha pagina
+                </div>
+                <button type="button" class="btn-close btn-close-white me-2 m-auto"
+                        data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+        </div>
+    </div>
+    
+    <div class="d-flex align-items-start justify-content-center">
+        <h1>Bem vindo ao meu site!</h1>
+    </div><br>
  
-    <a href="./editais"><button>Lista de editais</button></a><br><br>
-    <a href="./registro"><button>Fazer registro</button></a>
+    <script th:src="@{/webjars/bootstrap/5.3.8/js/bootstrap.bundle.min.js}"></script>
+<script>
+    const toast = new bootstrap.Toast(document.getElementById('loginToast'));
+    toast.show();
+</script>
 </body>
+
 </html>

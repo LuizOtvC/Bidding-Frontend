@@ -6,6 +6,9 @@ package com.bidding.system.frontend.bidding_.frontend.controller;
 
 import com.bidding.system.frontend.bidding_.frontend.model.UserLogarBean;
 import com.bidding.system.frontend.bidding_.frontend.service.AuthService;
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -34,8 +37,7 @@ public class LogarController {
     public String home(Model model) {
         model.addAttribute("message", "opa");
         return "home";
-    }
-    
+    }  
 
     @PostMapping("/logar")
     public String fazerLogin(@ModelAttribute UserLogarBean user, HttpSession session) {
@@ -44,4 +46,9 @@ public class LogarController {
         return "redirect:/";
     }
     
+    @GetMapping("/logout")
+    public String logout(HttpSession session) {
+       session.setAttribute("token", "");
+    return "redirect:/logar";
+}
 }
