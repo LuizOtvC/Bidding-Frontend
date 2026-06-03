@@ -4,7 +4,12 @@
  */
 package com.bidding.system.frontend.bidding_.frontend.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import java.sql.Date;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import org.springframework.format.annotation.DateTimeFormat;
 
 /**
  *
@@ -14,19 +19,24 @@ public class EditalBean {
    private Long id;
     private String titulo;
     private String descricao;
-    private Date data_fechamento;
+    @JsonProperty("data_fechamento")
+    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
+    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
+    private LocalDateTime data_fechamento;
     private String status;
 
     public EditalBean() {
     }
 
-    public EditalBean(Long id, String titulo, String descricao, Date data_fechamento, String status) {
+    public EditalBean(Long id, String titulo, String descricao, LocalDateTime data_fechamento, String status) {
         this.id = id;
         this.titulo = titulo;
         this.descricao = descricao;
         this.data_fechamento = data_fechamento;
         this.status = status;
     }
+
+    
 
     public Long getId() {
         return id;
@@ -52,13 +62,15 @@ public class EditalBean {
         this.descricao = descricao;
     }
 
-    public Date getData_fechamento() {
+    public LocalDateTime getData_fechamento() {
         return data_fechamento;
     }
 
-    public void setData_fechamento(Date data_fechamento) {
+    public void setData_fechamento(LocalDateTime data_fechamento) {
         this.data_fechamento = data_fechamento;
     }
+
+    
 
     public String getStatus() {
         return status;
@@ -68,7 +80,10 @@ public class EditalBean {
         this.status = status;
     }
 
-  
+  public String getDataFechamentoFormatada() {
+        if (data_fechamento == null) return "-";
+        return data_fechamento.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"));
+    }
     
     
 }

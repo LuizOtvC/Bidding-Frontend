@@ -4,8 +4,40 @@
     <title>Editais</title>
     <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.8/css/bootstrap.min.css}"/>
 </head>
-<body>
-    <br><h1 class="text-center mb-4">Lista de Editais</h1><br><br>
+<body><br>
+    
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1 class="h2 text-primary mb-0">Lista de Editais</h1>
+        <div>
+            <a th:if="${role == 'COMPRADOR'}" th:href="@{/novoEdital}" class="btn btn-success shadow-sm">
+                + Criar Novo Edital
+            </a>
+            <a th:href="@{/logout}" class="btn btn-outline-danger ms-2 shadow-sm">Logout</a>
+        </div>
+    </div>
+    
+    
+    <div class="card shadow-sm mb-4">
+        <div class="card-body">
+            <form th:action="@{/editais}" method="get" class="row g-3 align-items-center">
+                <div class="col-auto">
+                    <div class="form-check form-switch mt-2">
+                        <input class="form-check-input" type="checkbox" role="switch" name="urgente" value="true"
+                               id="urgenteCheck" th:checked="${urgente}"/>
+                        <label class="form-check-label fw-bold text-danger" for="urgenteCheck">
+                            Mostrar apenas urgentes (ABERTOS fechando em 48h)
+                        </label>
+                    </div>
+                </div>
+                <div class="col-auto ms-auto">
+                    <button type="submit" class="btn btn-primary btn-sm px-3">Filtrar</button>
+                    <button type="button" class="btn btn-secondary btn-sm px-3 ms-2"
+                            th:onclick="'window.location.href=\'' + @{/editais} + '\'; return false'">Limpar Filtros
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
     
     
         <div class="container">

@@ -30,8 +30,10 @@ public class RegistroController {
 
     @PostMapping("/registro")
     public String fazerRegistro(@ModelAttribute UserBean user) {
-        service.Registrar(user);
-        return "redirect:/logar";
+        
+           service.Registrar(user);
+        return "redirect:/logar";        
+        
     }
     
     

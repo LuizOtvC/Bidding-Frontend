@@ -13,18 +13,22 @@ public class UserBean {
     private String nome;
     private String email;
     private String senha;
+    private String comfirmarSenha;
     private String role;
 
     public UserBean() {
     }
 
-    public UserBean(Long id, String nome, String email, String senha, String role) {
+    public UserBean(Long id, String nome, String email, String senha, String comfirmarSenha, String role) {
         this.id = id;
         this.nome = nome;
         this.email = email;
         this.senha = senha;
+        this.comfirmarSenha = comfirmarSenha;
         this.role = role;
     }
+
+   
 
     public Long getId() {
         return id;
@@ -57,6 +61,16 @@ public class UserBean {
     public void setSenha(String senha) {
         this.senha = senha;
     }
+
+    public String getComfirmarSenha() {
+        return comfirmarSenha;
+    }
+
+    public void setComfirmarSenha(String comfirmarSenha) {
+        this.comfirmarSenha = comfirmarSenha;
+    }
+    
+    
 
     public String getRole() {
         return role;
