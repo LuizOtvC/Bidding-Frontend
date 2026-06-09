@@ -5,6 +5,7 @@
 package com.bidding.system.frontend.bidding_.frontend.service;
 
 import com.bidding.system.frontend.bidding_.frontend.model.EditalBean;
+import com.bidding.system.frontend.bidding_.frontend.model.LanceBean;
 import com.bidding.system.frontend.bidding_.frontend.model.UserBean;
 import com.bidding.system.frontend.bidding_.frontend.model.UserLogarBean;
 import java.nio.charset.StandardCharsets;
@@ -71,6 +72,15 @@ public class AuthService {
                 .uri("/api/edital/inserir")
                 .header("Authorization", "Bearer " + token)
                 .body(edital)
+                .retrieve()
+                .body(String.class);
+    }
+    
+    public void CriarLance(Long id, LanceBean lance, String token){
+        restclient.post()
+                .uri("/api/edital/{id}/lance", id)
+                .header("Authorization", "Bearer " + token)
+                .body(lance)
                 .retrieve()
                 .body(String.class);
     }

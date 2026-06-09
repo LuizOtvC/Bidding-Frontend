@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this template
+-->
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <header th:fragment="custom-header">
+            <nav class="navbar navbar-expand-lg bg-body-tertiary">
+  <div class="container-fluid">
+    <a class="navbar-brand">Home</a>
+  
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="/editais">Lista de Editais</a>
+        </li>
+        <li class="nav-item" th:if="${role == 'COMPRADOR'}">
+            <a class="nav-link active" href="/novoEdital">Criar Edital</a>
+          </li>
+          <li class="nav-item" th:if="${role == 'FORNECEDOR'}">
+            <a class="nav-link active" href="/lance">Criar Lance</a>
+          </li>
+      </ul>  
+    
+      
+    
+    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" href="/logout">Relogar</a>
+        </li>
+    </ul><br>
+    
+    
+  </div>
+    </nav>
+        </header>
+        
+    </body>
+</html>

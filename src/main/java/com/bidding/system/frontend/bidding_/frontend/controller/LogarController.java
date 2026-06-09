@@ -54,6 +54,8 @@ public class LogarController {
         if(token == null){            
         return "redirect:/logar";
         }
+        String role = (String) session.getAttribute("role");
+        model.addAttribute("role", role);
        return "home";
     }  
 

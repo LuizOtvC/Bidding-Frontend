@@ -31,6 +31,7 @@ public class EditalController {
     @Autowired
     private AuthService editalService;
     
+    
     private String extrairMensagemDeErro(HttpClientErrorException e) {
         try {
             ObjectMapper mapper = new ObjectMapper();
@@ -65,20 +66,30 @@ public class EditalController {
     public String novoEdital(Model model, HttpSession session){
         String token = (String) session.getAttribute("token");
         if (token == null) return "redirect:/logar";
+        
+        String role = (String) session.getAttribute("role");
+        if (!"COMPRADOR".equals(role)) return "redirect:/editais";
+        
         model.addAttribute("editalBean", new EditalBean());
+        model.addAttribute("role", role);
         return "novoEdital";
     }
     
     @PostMapping("/novoEdital")
     public String novoEdital(@ModelAttribute("editalBean") EditalBean edital, HttpSession session, Model model){
+        String token = (String) session.getAttribute("token");
+    if (token == null) return "redirect:/logar";
+
+    String role = (String) session.getAttribute("role");
+    if (!"COMPRADOR".equals(role)) return "redirect:/editais";       
         try{
-            String token = (String) session.getAttribute("token");
             editalService.CriarEdital(edital, token);
             return "redirect:/editais";
         }catch(HttpClientErrorException e){
             String msg = extrairMensagemDeErro(e);
             model.addAttribute("errorMessage", msg);
             model.addAttribute("editalBean", edital);
+            model.addAttribute("role", role);
             return "novoEdital";
         }
     }
