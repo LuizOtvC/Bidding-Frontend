@@ -6,6 +6,7 @@ package com.bidding.system.frontend.bidding_.frontend.controller;
 
 import com.bidding.system.frontend.bidding_.frontend.model.EditalBean;
 import com.bidding.system.frontend.bidding_.frontend.model.LanceBean;
+import com.bidding.system.frontend.bidding_.frontend.model.MeuLanceBean;
 import com.bidding.system.frontend.bidding_.frontend.model.UserLogarBean;
 import com.bidding.system.frontend.bidding_.frontend.service.AuthService;
 import jakarta.servlet.http.HttpSession;
@@ -45,7 +46,7 @@ public class LanceController {
 
 
     @GetMapping("/lance/{id}")
-public String lance(Model model, HttpSession session, @PathVariable long id) {
+    public String Criarlance(Model model, HttpSession session, @PathVariable long id) {
     String token = (String) session.getAttribute("token");
     if (token == null) return "redirect:/logar";
     String role = (String) session.getAttribute("role");
@@ -73,5 +74,20 @@ public String fazerLance(@PathVariable long id, @ModelAttribute LanceBean lance,
         model.addAttribute("role", role);
         return "lance";
     }
+}
+@GetMapping("/meus-lances")
+public String meusLances(Model model, HttpSession session) {
+    String token = (String) session.getAttribute("token");
+    if (token == null) return "redirect:/logar";
+    
+
+    String role = (String) session.getAttribute("role");
+    if (!"FORNECEDOR".equals(role)) return "redirect:/editais";
+
+    List<MeuLanceBean> lances = editalService.getMeusLances(token);
+
+    model.addAttribute("lances", lances);
+    model.addAttribute("role", role);
+    return "meus-lances";
 }
 }

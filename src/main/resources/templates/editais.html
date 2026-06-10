@@ -50,6 +50,9 @@
             <td th:text="${edital.descricao}"></td>
             <td th:text="${edital.data_fechamento}"></td>
             <td th:text="${edital.status}"></td>
+            <td th:if="${role == 'FORNECEDOR'}">
+        <a th:href="@{/editais-por/{id}(id=${edital.id})}" class="btn btn-primary btn-sm">Ver Detalhe</a>
+    </td>
         </tr>
     
     </table>

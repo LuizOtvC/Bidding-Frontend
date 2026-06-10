@@ -14,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.client.HttpClientErrorException;
@@ -93,6 +94,20 @@ public class EditalController {
             return "novoEdital";
         }
     }
+    @GetMapping("/editais-por/{id}")
+    public String editalPorId(Model model, HttpSession session, @PathVariable long id) {
+    String token = (String) session.getAttribute("token");
+    if (token == null) return "redirect:/logar";
+    
+    String role = (String) session.getAttribute("role");
+   
+    if (!"FORNECEDOR".equals(role)) return "redirect:/editais";      
+    EditalBean edital = editalService.listarEditaisPorId(token, id);
+    
+    model.addAttribute("edital", edital);
+    model.addAttribute("role", role);
+    return "edital-detalhe";
+}
 }
     
     

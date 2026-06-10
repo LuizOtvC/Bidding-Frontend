@@ -6,12 +6,15 @@ package com.bidding.system.frontend.bidding_.frontend.service;
 
 import com.bidding.system.frontend.bidding_.frontend.model.EditalBean;
 import com.bidding.system.frontend.bidding_.frontend.model.LanceBean;
+import com.bidding.system.frontend.bidding_.frontend.model.MeuLanceBean;
 import com.bidding.system.frontend.bidding_.frontend.model.UserBean;
 import com.bidding.system.frontend.bidding_.frontend.model.UserLogarBean;
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.Base64;
+import java.util.Collections;
 import java.util.List;
+import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClient;
@@ -78,12 +81,31 @@ public class AuthService {
     
     public void CriarLance(Long id, LanceBean lance, String token){
         restclient.post()
-                .uri("/api/edital/{id}/lance", id)
+                .uri("/api/lance/{id}", id)
                 .header("Authorization", "Bearer " + token)
                 .body(lance)
                 .retrieve()
                 .body(String.class);
     }
+    
+    public EditalBean listarEditaisPorId(String token, long id) {
+        return restclient.get()
+                .uri(uriBuilder -> uriBuilder
+                        .path("/api/edital/listar/{id}")
+                        .build(id))
+                .header("Authorization", "Bearer " + token)
+                .retrieve()
+                .body(EditalBean.class);
+    }
+    public List<MeuLanceBean> getMeusLances(String token) {
+    List<MeuLanceBean> lances = restclient.get()
+            .uri("/api/lance/meus-lances")
+            .header("Authorization", "Bearer " + token)
+            .retrieve()
+            .body(new ParameterizedTypeReference<List<MeuLanceBean>>() {});
+
+    return lances != null ? lances : Collections.emptyList();
+}
     
     public String extrairRole(String token) {
         try {

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Meus Lances</title>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.8/css/bootstrap.min.css}"/>
+</head>
+<body>
+
+    <div th:replace="~{fragments/Layout :: custom-header}"></div>
+
+    <div class="container">
+        <div class="row justify-content-center">
+
+            <h2 class="mb-4 mt-3">Meus Lances</h2>
+
+            <div th:if="${lances.isEmpty()}" class="alert alert-info">
+                Você ainda não fez nenhum lance.
+            </div>
+
+            <table th:if="${!lances.isEmpty()}" class="table table-striped-columns">
+                <tr>
+                    <th>Edital</th>
+                    <th>Valor do Lance</th>
+                    <th>Data do Lance</th>
+                    <th>Status do Edital</th>
+                    <th>Situação</th>
+                </tr>
+                <tr th:each="lance : ${lances}">
+                    <td th:text="${lance.titulo}"></td>
+                    <td th:text="${'R$ ' + #numbers.formatDecimal(lance.valor, 1, 'COMMA', 2, 'POINT')}"></td>
+                    <td th:text="${#temporals.format(lance.data_lance, 'dd/MM/yyyy HH:mm')}"></td>
+                    <td>
+                        <span th:if="${'ABERTO'.equals(lance.status)}" class="badge bg-success">Aberto</span>
+                        <span th:unless="${'ABERTO'.equals(lance.status)}" class="badge bg-secondary">Fechado</span>
+                    </td>
+                    <td>
+                        <span th:if="${lance.vencedor}" class="badge bg-warning text-dark">🏆 Vencedor</span>
+                        <span th:unless="${lance.vencedor}" class="text-muted">-</span>
+                    </td>
+                </tr>
+            </table>
+
+            <div class="mt-2">
+                <a href="/editais" class="btn btn-secondary btn-sm">Voltar para Editais</a>
+            </div>
+
+        </div>
+    </div>
+
+</body>
+</html>
